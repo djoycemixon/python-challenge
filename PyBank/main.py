@@ -17,7 +17,7 @@ revchange_list = []
 month_change = []
 gincrease = ["", 0]
 gdecrease = ["", 9999999999]
-
+mean = []
 # Read and skip header
 
 with open(budgetfile, newline='') as csv_file:
@@ -36,8 +36,14 @@ with open(budgetfile, newline='') as csv_file:
                 # revenue changes
                 currentrev_change = int(row[1]) - prev_monthrev
                 prev_monthrev = int(row[-1])
-                month_change = [row[1]]
+                # month_change = [row[1]]
                 revchange_list = revchange_list + [current_revchange]
+
+                month_change = round(total_revenue / total_months)
+
+
+
+
 
                 # largest increase, decrease and avg change
 if (current_revchange > gincrease[1]):
@@ -60,7 +66,7 @@ print(f"    Financial Analysis      \n")
 print(f"----------------------------\n")
 print(f"Total Months: {total_months}\n")
 print(f"Total:    ${total_revenue}\n"  )
-print(f"Average Change: ${current_revchange}\n")
+print(f"Average Change: ${month_change}\n")
 print(f"Greatest Increase in Profits: {gincrease[0]} ${gincrease[1]}\n") 
 print(f"Greatest Decrease in Losses: {gdecrease[0]} ${gdecrease[1]}\n")
         
